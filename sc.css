@@ -1,3 +1,44 @@
 .widget-content {
   width: 484px !important;
 }
+
+/* Broker badge/label styling decoupled from JS */
+.broker-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+}
+
+.broker-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--broker-color, #aaa);
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px;
+  border-radius: 4px;
+  padding: 1px 2px;
+  min-width: 24px;
+}
+
+.broker-label {
+  color: var(--broker-color, #aaa);
+  font-weight: 700;
+  font-size: 10px;
+}
+
+/* Type-based color mapping via data attribute */
+[data-broker-type="S-Money"] {
+  --broker-color: #0069a8;
+}
+[data-broker-type="Whale"] {
+  --broker-color: #008236;
+}
+[data-broker-type="Retail"] {
+  --broker-color: #3f3f46;
+}
+[data-broker-type="Mix"] {
+  --broker-color: #a800b7;
+}

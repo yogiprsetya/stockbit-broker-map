@@ -99,12 +99,7 @@ const BROKERS = {
   YP: { name: "Mirae Asset Sekuritas Indonesia", type: "Mix" },
 };
 
-const TYPE_COLORS = {
-  "S-Money": "#0069A8",
-  Whale: "#008236",
-  Retail: "#3F3F46",
-  Mix: "#A800B7",
-};
+// Color styling moved to CSS via [data-broker-type] and CSS variables
 
 const BROKER_CODES = new Set(Object.keys(BROKERS));
 const CODE_REGEX = /^([A-Z]{2})$/;
@@ -130,39 +125,22 @@ function processElement(el) {
   if (!BROKER_CODES.has(code)) return;
 
   const broker = BROKERS[code];
-  const color = TYPE_COLORS[broker.type] || "#aaaaaa";
 
   el.textContent = "";
   el.title = broker.name;
-  el.style.display = "inline-flex";
-  el.style.alignItems = "center";
-  el.style.gap = "4px";
-  el.style.textTransform = "uppercase";
+  // Use CSS classes instead of inline styles
+  el.classList.add("broker-container");
+  el.setAttribute("data-broker-type", broker.type);
 
   const badge = document.createElement("span");
   badge.setAttribute("data-broker-fragment", "");
   badge.textContent = code;
-  badge.style.cssText = `
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${color};
-    color: #fff;
-    font-weight: 700;
-    font-size: 11px;
-    border-radius: 4px;
-    padding: 1px 2px;
-    min-width: 24px;
-  `;
+  badge.classList.add("broker-badge");
 
   const label = document.createElement("span");
   label.setAttribute("data-broker-fragment", "");
   label.textContent = broker.type.toUpperCase();
-  label.style.cssText = `
-    color: ${color};
-    font-weight: 700;
-    font-size: 10px;
-  `;
+  label.classList.add("broker-label");
 
   el.appendChild(badge);
   el.appendChild(label);

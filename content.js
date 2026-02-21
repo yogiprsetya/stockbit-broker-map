@@ -1,51 +1,51 @@
 // Broker mapping: code -> { name, type }
 const BROKERS = {
-  // Smartmo
-  AN: { name: "Wanteg Sekuritas", type: "Smartmo" },
-  AO: { name: "ERDIKHA ELIT SEKURITAS", type: "Smartmo" },
-  AR: { name: "Binaartha Sekuritas", type: "Smartmo" },
-  AT: { name: "Phintraco Sekuritas", type: "Smartmo" },
-  BR: { name: "Trust Sekuritas", type: "Smartmo" },
-  CD: { name: "Mega Capital Sekuritas", type: "Smartmo" },
-  DD: { name: "Makindo Sekuritas", type: "Smartmo" },
-  DH: { name: "SINARMAS SEKURITAS", type: "Smartmo" },
-  DU: { name: "KAF Sekuritas Indonesia", type: "Smartmo" },
-  DX: { name: "Bahana Sekuritas", type: "Smartmo" },
-  EL: { name: "Evergreen Sekuritas Indonesia", type: "Smartmo" },
-  FO: { name: "Forte Global Sekuritas", type: "Smartmo" },
-  FZ: { name: "Waterfront Sekuritas Indonesia", type: "Smartmo" },
-  GA: { name: "BNC Sekuritas Indonesia", type: "Smartmo" },
-  GI: { name: "Webull Sekuritas Indonesia", type: "Smartmo" },
-  GR: { name: "PANIN SEKURITAS Tbk.", type: "Smartmo" },
-  HP: { name: "Henan Putihrai Sekuritas", type: "Smartmo" },
-  IC: { name: "Integrity Capital Sekuritas", type: "Smartmo" },
-  ID: { name: "Anugerah Sekuritas Indonesia", type: "Smartmo" },
-  IN: { name: "INVESTINDO NUSANTARA SEKURITA", type: "Smartmo" },
-  IT: { name: "INTI TELADAN SEKURITAS", type: "Smartmo" },
-  IU: { name: "Indo Capital Sekuritas", type: "Smartmo" },
-  KI: { name: "Ciptadana Sekuritas Asia", type: "Smartmo" },
-  KK: { name: "Phillip Sekuritas Indonesia", type: "Smartmo" },
-  LG: { name: "Trimegah Sekuritas Indonesia Tbk.", type: "Smartmo" },
-  MU: { name: "Minna Padi Investama Sekuritas", type: "Smartmo" },
-  NI: { name: "BNI Sekuritas", type: "Smartmo" },
-  OD: { name: "BRI Danareksa Sekuritas", type: "Smartmo" },
-  PC: { name: "FAC Sekuritas Indonesia", type: "Smartmo" },
-  PO: { name: "Pilarmas Investindo Sekuritas", type: "Smartmo" },
-  PP: { name: "Aldiracita Sekuritas Indonesia", type: "Smartmo" },
-  PS: { name: "PARAMITRA ALFA SEKURITAS", type: "Smartmo" },
-  QA: { name: "Tuntun Sekuritas Indonesia", type: "Smartmo" },
-  RF: { name: "Buana Capital Sekuritas", type: "Smartmo" },
-  RG: { name: "Profindo Sekuritas Indonesia", type: "Smartmo" },
-  RO: { name: "Pluang Maju Sekuritas", type: "Smartmo" },
-  RS: { name: "Yulie Sekuritas Indonesia Tbk.", type: "Smartmo" },
-  SA: { name: "Elit Sukses Sekuritas", type: "Smartmo" },
-  SF: { name: "Surya Fajar Sekuritas", type: "Smartmo" },
-  SH: { name: "Artha Sekuritas Indonesia", type: "Smartmo" },
-  SQ: { name: "BCA Sekuritas", type: "Smartmo" },
-  SS: { name: "Supra Sekuritas Indonesia", type: "Smartmo" },
-  TS: { name: "Dwidana Sakti Sekuritas", type: "Smartmo" },
-  XA: { name: "NH Korindo Sekuritas Indonesia", type: "Smartmo" },
-  ZR: { name: "Bumiputera Sekuritas", type: "Smartmon" },
+  // S-Money
+  AN: { name: "Wanteg Sekuritas", type: "S-Money" },
+  AO: { name: "ERDIKHA ELIT SEKURITAS", type: "S-Money" },
+  AR: { name: "Binaartha Sekuritas", type: "S-Money" },
+  AT: { name: "Phintraco Sekuritas", type: "S-Money" },
+  BR: { name: "Trust Sekuritas", type: "S-Money" },
+  CD: { name: "Mega Capital Sekuritas", type: "S-Money" },
+  DD: { name: "Makindo Sekuritas", type: "S-Money" },
+  DH: { name: "SINARMAS SEKURITAS", type: "S-Money" },
+  DU: { name: "KAF Sekuritas Indonesia", type: "S-Money" },
+  DX: { name: "Bahana Sekuritas", type: "S-Money" },
+  EL: { name: "Evergreen Sekuritas Indonesia", type: "S-Money" },
+  FO: { name: "Forte Global Sekuritas", type: "S-Money" },
+  FZ: { name: "Waterfront Sekuritas Indonesia", type: "S-Money" },
+  GA: { name: "BNC Sekuritas Indonesia", type: "S-Money" },
+  GI: { name: "Webull Sekuritas Indonesia", type: "S-Money" },
+  GR: { name: "PANIN SEKURITAS Tbk.", type: "S-Money" },
+  HP: { name: "Henan Putihrai Sekuritas", type: "S-Money" },
+  IC: { name: "Integrity Capital Sekuritas", type: "S-Money" },
+  ID: { name: "Anugerah Sekuritas Indonesia", type: "S-Money" },
+  IN: { name: "INVESTINDO NUSANTARA SEKURITA", type: "S-Money" },
+  IT: { name: "INTI TELADAN SEKURITAS", type: "S-Money" },
+  IU: { name: "Indo Capital Sekuritas", type: "S-Money" },
+  KI: { name: "Ciptadana Sekuritas Asia", type: "S-Money" },
+  KK: { name: "Phillip Sekuritas Indonesia", type: "S-Money" },
+  LG: { name: "Trimegah Sekuritas Indonesia Tbk.", type: "S-Money" },
+  MU: { name: "Minna Padi Investama Sekuritas", type: "S-Money" },
+  NI: { name: "BNI Sekuritas", type: "S-Money" },
+  OD: { name: "BRI Danareksa Sekuritas", type: "S-Money" },
+  PC: { name: "FAC Sekuritas Indonesia", type: "S-Money" },
+  PO: { name: "Pilarmas Investindo Sekuritas", type: "S-Money" },
+  PP: { name: "Aldiracita Sekuritas Indonesia", type: "S-Money" },
+  PS: { name: "PARAMITRA ALFA SEKURITAS", type: "S-Money" },
+  QA: { name: "Tuntun Sekuritas Indonesia", type: "S-Money" },
+  RF: { name: "Buana Capital Sekuritas", type: "S-Money" },
+  RG: { name: "Profindo Sekuritas Indonesia", type: "S-Money" },
+  RO: { name: "Pluang Maju Sekuritas", type: "S-Money" },
+  RS: { name: "Yulie Sekuritas Indonesia Tbk.", type: "S-Money" },
+  SA: { name: "Elit Sukses Sekuritas", type: "S-Money" },
+  SF: { name: "Surya Fajar Sekuritas", type: "S-Money" },
+  SH: { name: "Artha Sekuritas Indonesia", type: "S-Money" },
+  SQ: { name: "BCA Sekuritas", type: "S-Money" },
+  SS: { name: "Supra Sekuritas Indonesia", type: "S-Money" },
+  TS: { name: "Dwidana Sakti Sekuritas", type: "S-Money" },
+  XA: { name: "NH Korindo Sekuritas Indonesia", type: "S-Money" },
+  ZR: { name: "Bumiputera Sekuritas", type: "S-Moneyn" },
 
   // Whale
   AG: { name: "Kiwoom Sekuritas Indonesia", type: "Whale" },
@@ -102,7 +102,7 @@ const BROKERS = {
 
 // Color per type (sesuai design system)
 const TYPE_COLORS = {
-  Smartmo: "#0069A8",
+  "S-Money": "#0069A8",
   Whale: "#008236",
   Retail: "#3F3F46",
   Mix: "#0069A8",
@@ -120,6 +120,8 @@ const CODE_REGEX = /^([A-Z]{2})$/;
  */
 function processElement(el) {
   const text = el.textContent.trim();
+  // Skip if text is just a hyphen
+  if (text === "-") return;
   if (!CODE_REGEX.test(text)) return;
   const code = text;
   if (!BROKER_CODES.has(code)) return;
@@ -132,7 +134,8 @@ function processElement(el) {
   el.title = broker.name;
   el.style.display = "inline-flex";
   el.style.alignItems = "center";
-  el.style.gap = "8px";
+  el.style.gap = "4px";
+  el.style.textTransform = "uppercase";
 
   // Badge (colored box with broker code)
   const badge = document.createElement("span");
@@ -142,15 +145,12 @@ function processElement(el) {
     align-items: center;
     justify-content: center;
     background-color: ${color};
-    color: #ffffff;
+    color: #fff;
     font-weight: 700;
     font-size: 11px;
-    letter-spacing: 0.5px;
-    border-radius: 5px;
-    padding: 2px 6px;
-    min-width: 30px;
-    line-height: 1.6;
-    font-family: monospace;
+    border-radius: 4px;
+    padding: 1px 2px;
+    min-width: 24px;
   `;
 
   // Type label text
@@ -159,10 +159,7 @@ function processElement(el) {
   label.style.cssText = `
     color: ${color};
     font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    font-family: inherit;
+    font-size: 10px;
   `;
 
   el.appendChild(badge);
@@ -196,7 +193,10 @@ const observer = new MutationObserver(() => {
   scanAndReplace();
 });
 
+// Observe the entire document body for changes
 observer.observe(document.body, {
   childList: true,
   subtree: true,
+  attributes: true,
+  attributeFilter: ["class", "style", "id", "data-*"],
 });

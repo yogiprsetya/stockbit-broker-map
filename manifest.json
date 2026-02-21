@@ -2,12 +2,12 @@
   "manifest_version": 3,
   "name": "Stockbit Broker Map",
   "version": "1.0",
-  "description": "Mengganti kode broker dengan tipe (Whale, Smartmoney, Retail, Mix) di Stockbit",
+  "description": "Mengganti kode broker dengan tipe (Whale, S-Money, Retail, Mix) di Stockbit",
   "permissions": [],
   "content_scripts": [
     {
       "matches": [
-        "*://*.stockbit.com/symbol/*"
+        "*://*.stockbit.com/*"
       ],
       "js": [
         "content.js"

@@ -1,4 +1,3 @@
-// Broker mapping: code -> { name, type }
 const BROKERS = {
   // S-Money
   AN: { name: "Wanteg Sekuritas", type: "S-Money" },
@@ -45,7 +44,7 @@ const BROKERS = {
   SS: { name: "Supra Sekuritas Indonesia", type: "S-Money" },
   TS: { name: "Dwidana Sakti Sekuritas", type: "S-Money" },
   XA: { name: "NH Korindo Sekuritas Indonesia", type: "S-Money" },
-  ZR: { name: "Bumiputera Sekuritas", type: "S-Moneyn" },
+  ZR: { name: "Bumiputera Sekuritas", type: "S-Money" },
 
   // Whale
   AG: { name: "Kiwoom Sekuritas Indonesia", type: "Whale" },
@@ -100,27 +99,31 @@ const BROKERS = {
   YP: { name: "Mirae Asset Sekuritas Indonesia", type: "Mix" },
 };
 
-// Color per type (sesuai design system)
 const TYPE_COLORS = {
   "S-Money": "#0069A8",
   Whale: "#008236",
   Retail: "#3F3F46",
-  Mix: "#0069A8",
+  Mix: "#A800B7",
 };
 
-// Build a Set of all known codes for fast lookup
 const BROKER_CODES = new Set(Object.keys(BROKERS));
-
-// Regex: match standalone 2-letter broker codes (exact cell text)
 const CODE_REGEX = /^([A-Z]{2})$/;
 
-/**
- * Process a single element: if its trimmed text is an exact broker code,
- * replace the text content and apply styling.
- */
+function widgetModifier() {
+  const selector = "#widget-container > div:first-child";
+  const elements = document.querySelector(selector);
+
+  if (!elements || elements.classList.contains("widget-content")) return;
+
+  elements.classList.add("widget-content");
+}
+
+// ─── Core: process a single element ──────────────────────────────────────────
+
 function processElement(el) {
+  if (el.querySelector("[data-broker-fragment]")) return;
+
   const text = el.textContent.trim();
-  // Skip if text is just a hyphen
   if (text === "-") return;
   if (!CODE_REGEX.test(text)) return;
   const code = text;
@@ -129,7 +132,6 @@ function processElement(el) {
   const broker = BROKERS[code];
   const color = TYPE_COLORS[broker.type] || "#aaaaaa";
 
-  // Clear existing content
   el.textContent = "";
   el.title = broker.name;
   el.style.display = "inline-flex";
@@ -137,8 +139,8 @@ function processElement(el) {
   el.style.gap = "4px";
   el.style.textTransform = "uppercase";
 
-  // Badge (colored box with broker code)
   const badge = document.createElement("span");
+  badge.setAttribute("data-broker-fragment", "");
   badge.textContent = code;
   badge.style.cssText = `
     display: inline-flex;
@@ -153,8 +155,8 @@ function processElement(el) {
     min-width: 24px;
   `;
 
-  // Type label text
   const label = document.createElement("span");
+  label.setAttribute("data-broker-fragment", "");
   label.textContent = broker.type.toUpperCase();
   label.style.cssText = `
     color: ${color};
@@ -167,36 +169,101 @@ function processElement(el) {
   el.setAttribute("data-broker-replaced", "true");
 }
 
-/**
- * Scan all leaf-level table cells and spans for broker codes.
- */
-function scanAndReplace() {
-  // Target common table cell and span selectors used by Stockbit
-  const selectors = ".bandar-detector-wrapper .ant-table-cell p";
-  const elements = document.querySelectorAll(selectors);
+// ─── Core: scan subtree ───────────────────────────────────────────────────────
+
+function scanAndReplace(root = document) {
+  const elements = root.querySelectorAll(
+    ".ant-table-cell p, .ant-table-cell span",
+  );
 
   elements.forEach((el) => {
-    // Skip already processed
-    if (el.getAttribute("data-broker-replaced")) return;
-    // Only process if element has no child elements (leaf node with text)
-    if (el.children.length === 0) {
-      processElement(el);
-    }
+    // Skip fragment yang kita buat sendiri
+    if (el.getAttribute("data-broker-fragment")) return;
+
+    // Skip elemen yang nested DI DALAM elemen replaced lain
+    // tapi JANGAN skip elemen replaced itu sendiri —
+    // React mungkin sudah wipe children-nya dan perlu di-process ulang
+    const replaced = el.closest("[data-broker-replaced]");
+    if (replaced && replaced !== el) return;
+
+    processElement(el);
   });
 }
 
-// Initial scan
-scanAndReplace();
+// ─── Initial scan ─────────────────────────────────────────────────────────────
 
-// Watch for dynamic content (Stockbit is a SPA)
-const observer = new MutationObserver(() => {
-  scanAndReplace();
+scanAndReplace(document);
+widgetModifier();
+
+// ─── Debounced scan scheduler ─────────────────────────────────────────────────
+
+const pendingRoots = new Set();
+let scanScheduled = false;
+
+function scheduleScan(root) {
+  if (!root) return;
+  const r = root.nodeType === 1 ? root : document;
+  pendingRoots.add(r);
+  if (scanScheduled) return;
+  scanScheduled = true;
+  requestAnimationFrame(() => {
+    scanScheduled = false;
+    pendingRoots.forEach((pr) => {
+      try {
+        scanAndReplace(pr);
+      } catch (_) {}
+    });
+    pendingRoots.clear();
+  });
+}
+
+// ─── MutationObserver ─────────────────────────────────────────────────────────
+// Selalu observe document.body agar tidak jadi orphan saat React unmount container
+
+const observer = new MutationObserver((mutations) => {
+  for (const m of mutations) {
+    if (m.type === "characterData") {
+      const parent = m.target?.parentElement;
+      if (parent && !parent.closest("[data-broker-replaced]")) {
+        scheduleScan(parent);
+      }
+      continue;
+    }
+
+    if (m.type === "childList") {
+      // Deteksi React yang menghapus badge kita → scan parent segera
+      m.removedNodes.forEach((node) => {
+        if (
+          node.nodeType === 1 &&
+          node.getAttribute &&
+          node.getAttribute("data-broker-fragment")
+        ) {
+          if (m.target) scheduleScan(m.target);
+        }
+      });
+
+      scheduleScan(m.target);
+      m.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) scheduleScan(node);
+        else if (node.nodeType === 3 && node.parentNode)
+          scheduleScan(node.parentNode);
+      });
+    }
+  }
 });
 
-// Observe the entire document body for changes
 observer.observe(document.body, {
   childList: true,
   subtree: true,
-  attributes: true,
-  attributeFilter: ["class", "style", "id", "data-*"],
+  characterData: true,
 });
+
+// ─── Fallback periodic scan ───────────────────────────────────────────────────
+// Safety net untuk SPA navigation yang kadang tidak trigger MutationObserver
+
+setInterval(() => {
+  try {
+    scanAndReplace(document);
+    widgetModifier();
+  } catch (_) {}
+}, 3000);

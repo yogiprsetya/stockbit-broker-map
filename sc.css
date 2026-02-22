@@ -1,4 +1,4 @@
-.widget-content {
+.widget-content:not(:empty) {
   width: 484px !important;
 }
 

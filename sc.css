@@ -33,12 +33,15 @@
 [data-broker-type="S-Money"] {
   --broker-color: #0069a8;
 }
+
 [data-broker-type="Whale"] {
   --broker-color: #008236;
 }
+
 [data-broker-type="Retail"] {
   --broker-color: #3f3f46;
 }
+
 [data-broker-type="Mix"] {
   --broker-color: #a800b7;
 }

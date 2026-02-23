@@ -151,7 +151,7 @@ function processElement(el) {
 
 function scanAndReplace(root = document) {
   const elements = root.querySelectorAll(
-    ".ant-table-cell p, .ant-table-cell span",
+    ".bandar-detector-wrapper .ant-table-cell p, .ant-table-cell span",
   );
 
   elements.forEach((el) => {
